@@ -18,21 +18,21 @@ namespace DotNetKoans.CSharp
         public void DoubleQuotedStringsAreStrings()
         {
             var str = "Hello, World";
-            Assert.Equal(typeof(FillMeIn), str.GetType());
+            Assert.Equal(typeof(string), str.GetType());
         }
 
         [Koan(2)]
         public void SingleQuotedStringsAreNotStrings()
         {
             var str = 'H';
-			Assert.Equal(typeof(FillMeIn), str.GetType());
+			Assert.Equal(typeof(char), str.GetType());
         }
 
         [Koan(3)]
         public void CreateAStringWhichContainsDoubleQuotes()
         {
             var str = "Hello, \"World\"";
-            Assert.Equal(FILL_ME_IN, str.Length);
+            Assert.Equal(14, str.Length);
         }
 
         [Koan(4)]
@@ -41,15 +41,17 @@ namespace DotNetKoans.CSharp
             //The @ symbol creates a 'verbatim string literal'. 
             //Here's one thing you can do with it:
             var str = @"Hello, ""World""";
-            Assert.Equal(FILL_ME_IN, str.Length);
+            Assert.Equal(14, str.Length);
+            
         }
+
 
         [Koan(5)]
         public void VerbatimStringsCanHandleFlexibleQuoting()
         {
             var strA = @"Verbatim Strings can handle both ' and "" characters (when escaped)";
             var strB = "Verbatim Strings can handle both ' and \" characters (when escaped)";
-            Assert.Equal(FILL_ME_IN, strA.Equals(strB));
+            Assert.Equal(true, strA.Equals(strB));
         }
 
         [Koan(6)]
@@ -63,7 +65,7 @@ namespace DotNetKoans.CSharp
 am a
 broken line";
             Assert.Equal(20, verbatimString.Length);
-            var literalString = FILL_ME_IN;
+            var literalString = "I\r\nam a\r\nbroken line";
             Assert.Equal(literalString, verbatimString);
         }
 
@@ -83,7 +85,7 @@ broken line";
         public void PlusWillConcatenateTwoStrings()
         {
             var str = "Hello, " + "World";
-            Assert.Equal(FILL_ME_IN, str);
+            Assert.Equal("Hello, " + "World!", str);
         }
 
         [Koan(9)]
@@ -117,7 +119,7 @@ broken line";
             var originalString = strA;
             var strB = "World";
             strA += strB;
-            Assert.Equal(FILL_ME_IN, originalString);
+            Assert.Equal(strA += strB, originalString);
 
             //What just happened? Well, the string concatenation actually
             //takes strA and strB and creates a *new* string in memory
@@ -134,7 +136,7 @@ broken line";
 		{
 			var world = "World";
 			var str = String.Format("Hello, {0}", world);
-			Assert.Equal(FILL_ME_IN, str);
+			Assert.Equal("Hello, world", str);
 		}
 
 		[Koan(13)]
@@ -217,7 +219,7 @@ broken line";
 			strBuilder.Append("lazy ");
 			strBuilder.Append("dog.");
             var str = strBuilder.ToString();
-            Assert.Equal(FILL_ME_IN, str);
+            Assert.Equal("The quick brown fox jumped over the lazy dog", str);
 
             //String.Format and StringBuilder will be more efficent that concatenation. Prefer them.
         }
@@ -230,36 +232,36 @@ broken line";
 			strBuilder.AppendFormat("{0} {1} {2}", "jumped", "over", "the");
 			strBuilder.AppendFormat("{0} {1}.", "lazy", "dog");
 			var str = strBuilder.ToString();
-			Assert.Equal(FILL_ME_IN, str);
+			Assert.Equal("The quick brownjumped over thelazy dog.", str);
 		}
 		
         [Koan(23)]
         public void LiteralStringsInterpretsEscapeCharacters()
         {
             var str = "\n";
-            Assert.Equal(FILL_ME_IN, str.Length);
+            Assert.Equal(1, str.Length);
         }
 
         [Koan(24)]
         public void VerbatimStringsDoNotInterpretEscapeCharacters()
         {
             var str = @"\n";
-            Assert.Equal(FILL_ME_IN, str.Length);
+            Assert.Equal(2, str.Length);
         }
 
         [Koan(25)]
         public void VerbatimStringsStillDoNotInterpretEscapeCharacters()
         {
             var str = @"\\\";
-            Assert.Equal(FILL_ME_IN, str.Length);
+            Assert.Equal(3, str.Length);
         }
 
         [Koan(28)]
         public void YouCanGetASubstringFromAString()
         {
             var str = "Bacon, lettuce and tomato";
-            Assert.Equal(FILL_ME_IN, str.Substring(19));
-            Assert.Equal(FILL_ME_IN, str.Substring(7, 3));
+            Assert.Equal("tomato", str.Substring(19));
+            Assert.Equal("let", str.Substring(7, 3));
         }
 
         [Koan(29)]
@@ -282,7 +284,7 @@ broken line";
         {
             var str = "Sausage Egg Cheese";
             string[] words = str.Split();
-            Assert.Equal(new[] { FILL_ME_IN }, words);
+            Assert.Equal(new[] { "Sausage", "Egg", "Cheese" }, words);
         }
 
         [Koan(32)]
@@ -290,7 +292,7 @@ broken line";
         {
             var str = "the:rain:in:spain";
             string[] words = str.Split(':');
-            Assert.Equal(new[] { FILL_ME_IN }, words);
+            Assert.Equal(new[] { "the", "rain", "in", "spain",  }, words);
         }
 
         [Koan(33)]
@@ -299,7 +301,7 @@ broken line";
             var str = "the:rain:in:spain";
             var regex = new System.Text.RegularExpressions.Regex(":");
             string[] words = regex.Split(str);
-            Assert.Equal(new[] { FILL_ME_IN }, words);
+            Assert.Equal(new[] { "the", "rain", "in", "spain"  }, words);
 
             //A full treatment of regular expressions is beyond the scope
             //of this tutorial. The book "Mastering Regular Expressions"
